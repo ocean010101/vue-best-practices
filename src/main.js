@@ -5,8 +5,10 @@ import router from "./router";
 import store from './store'
 // 路由守卫
 import "./permission";
-Vue.config.productionTip = false
 
+import vPermission from "./directive/permission";
+Vue.config.productionTip = false
+Vue.directive("permission", vPermission);
 new Vue({
   router,
   store,
