@@ -37,6 +37,9 @@ export const asyncRoutes = [
     path: "/about",
     component: Layout,
     redirect: "/about/index",
+    // meta: { // 应用到所有孩子
+    //   roles: ['admin', 'editor']
+    // },
     children: [
       {
         path: "index",
@@ -48,7 +51,18 @@ export const asyncRoutes = [
           icon: "all",
           roles: ['admin', 'editor']
         },
-      }
+      },
+      // {
+      //   path: "test",
+      //   component: () =>
+      //     import(/* webpackChunkName: "home" */ "@/views/About.vue"),
+      //   name: "test",
+      //   meta: {
+      //     title: "About",
+      //     icon: "all",
+      //     roles: ['admin']
+      //   },
+      // },
     ]
   }
 ];
