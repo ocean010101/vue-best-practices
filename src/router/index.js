@@ -30,6 +30,29 @@ export const constRoutes = [
   }
 ];
 
+
+// 权限页面
+export const asyncRoutes = [
+  {
+    path: "/about",
+    component: Layout,
+    redirect: "/about/index",
+    children: [
+      {
+        path: "index",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/About.vue"),
+        name: "about",
+        meta: {
+          title: "About",
+          icon: "all",
+          roles: ['admin', 'editor']
+        },
+      }
+    ]
+  }
+];
+
 export default new Router({
   mode: "history",
   base: process.env.BASE_URL,

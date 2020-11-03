@@ -18,7 +18,7 @@ const actions = {
     const { username } = userInfo;
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (username === "admin") {
+        if (username === "admin" || username === "editor") {
           commit("SET_TOKEN", username);
           setToken(username);
           resolve();
