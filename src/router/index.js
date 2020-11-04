@@ -25,6 +25,16 @@ export const constRoutes = [
           title: "Home", // 导航菜单项标题
           icon: "all" // 导航菜单项图标
         }
+      },
+      {
+        path: "user",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/Home.vue"),
+        name: "user",
+        meta: {
+          title: "user 管理", // 导航菜单项标题
+          icon: "all" // 导航菜单项图标
+        }
       }
     ]
   }
@@ -47,22 +57,22 @@ export const asyncRoutes = [
           import(/* webpackChunkName: "home" */ "@/views/About.vue"),
         name: "about",
         meta: {
-          title: "About",
+          title: "用户中心",
           icon: "all",
           roles: ['admin', 'editor']
         },
       },
-      // {
-      //   path: "test",
-      //   component: () =>
-      //     import(/* webpackChunkName: "home" */ "@/views/About.vue"),
-      //   name: "test",
-      //   meta: {
-      //     title: "About",
-      //     icon: "all",
-      //     roles: ['admin']
-      //   },
-      // },
+      {
+        path: "test",
+        component: () =>
+          import(/* webpackChunkName: "home" */ "@/views/About.vue"),
+        name: "test",
+        meta: {
+          title: "关于我们",
+          icon: "all",
+          roles: ['admin']
+        },
+      },
     ]
   }
 ];
