@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>YVue Test</title>
+</head>
+
+<body>
+  <div id="app">
+    <p>{{name}}</p>
+    <p y-text="name"></p>
+    <p>{{age}}</p>
+    <input type="text" y-model="name">
+    <button @click="changeName">changeName</button>
+    <div y-html="html"></div>
+  </div>
+  <script src='./yvue.js'></script>
+  <script src='./compile.js'></script>
+
+  <script>
+    const app = new YVue({
+      el: '#app',
+      data: {
+        name: "ocean",
+        age: 18,
+        html: '<button>这是一个按钮</button>'
+      },
+      created() {
+        setTimeout(() => {
+          this.name = 'yang'
+        }, 1500)
+      },
+      methods: {
+        changeName() {
+          this.name = 'hello'
+          this.age = 1
+        }
+      }
+    })
+    console.log('app=', app);
+  </script>
+</body>
+
+</html>
