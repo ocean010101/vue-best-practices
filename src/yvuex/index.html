@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>YVuex</title>
+</head>
+
+<body>
+  <div id="app">
+    Clicked: {{ this.$store.state.count }} times, count is {{ evenOrOdd }}.
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <button @click="incrementIfOdd">Increment if odd</button>
+    <button @click="incrementAsync">Increment async</button>
+  </div>
+  <script src='../../node_modules/vue/dist/vue.js'></script>
+  <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+  <script src="./yvuex.js"></script>
+
+  <script>
+    // store.js
+    const state = {
+      count: 0
+    }
+    const mutations = {
+      increment(state) {
+        state.count++
+      },
+      decrement(state) {
+        state.count--
+      }
+    }
+    const actions = {
+      increment: ({
+        commit
+      }) => commit('increment'),
+      decrement: ({
+        commit
+      }) => commit('decrement'),
+      incrementIfOdd({
+        commit,
+        state
+      }) {
+        if ((state.count + 1) % 2 === 0) {
+          commit('increment')
+        }
+      },
+      incrementAsync({
+        commit
+      }) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            commit('increment')
+            resolve()
+          }, 1000)
+        })
+      }
+    }
+    const getters = {
+      evenOrOdd: state => state.count % 2 === 0 ? 'even' : 'odd'
+    }
+    let store = new Store({
+      state,
+      getters,
+      actions,
+      mutations
+    })
+    Vue.use(Store)
+    const app = new Vue({
+      store,
+      computed: {
+        evenOrOdd() {
+          return this.$store.getters.evenOrOdd
+        }
+      },
+      methods: {
+        increment() {
+          this.$store.commit('increment')
+          // this.$store.dispatch('increment')
+        },
+        decrement() {
+          // this.$store.commit('decrement')
+          this.$store.dispatch('decrement')
+        },
+        incrementIfOdd() {
+          this.$store.dispatch('incrementIfOdd')
+        },
+        incrementAsync() {
+          this.$store.dispatch('incrementAsync')
+        },
+      }
+    }).$mount('#app')
+  </script>
+</body>
+
+</html>
